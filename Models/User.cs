@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyWebAPI.Models.DTOs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,14 +9,7 @@ namespace MyWebAPI.Models
 {
     public class User
     {
-        public User(string name, string email, string password)
-        {
-            Email = email;
-            Name = name;
-            Password = password;
-            Id = new Guid();
-
-        }
+        
         [Key]
         public Guid Id { get; set; }
         [Required]
@@ -24,7 +18,6 @@ namespace MyWebAPI.Models
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
-
 
     }
 }

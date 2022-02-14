@@ -8,7 +8,7 @@ using MyWebAPI.Data;
 
 namespace MyWebAPI.Migrations
 {
-    [DbContext(typeof(UserContext))]
+    [DbContext(typeof(UserRepository))]
     [Migration("20220211030301_Pilot")]
     partial class Pilot
     {
