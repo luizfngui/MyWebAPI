@@ -8,7 +8,7 @@ using MyWebAPI.Data;
 namespace MyWebAPI.Migrations
 {
     [DbContext(typeof(UserRepository))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    partial class UserRepositoryModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -22,6 +22,9 @@ namespace MyWebAPI.Migrations
                     b.Property<byte[]>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("varbinary(16)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Email")
                         .IsRequired()

@@ -9,6 +9,10 @@ namespace MyWebAPI.Models
 {
     public class User
     {
+        public User()
+        {
+            CreatedAt = DateTime.UtcNow;
+        }
         
         [Key]
         public Guid Id { get; set; }
@@ -18,6 +22,10 @@ namespace MyWebAPI.Models
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
+        public DateTime CreatedAt { get; set; }
 
     }
+
+    
+       
 }

@@ -9,8 +9,8 @@ using MyWebAPI.Data;
 namespace MyWebAPI.Migrations
 {
     [DbContext(typeof(UserRepository))]
-    [Migration("20220211030301_Pilot")]
-    partial class Pilot
+    [Migration("20220215171654_Adicionando Usuarios")]
+    partial class AdicionandoUsuarios
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,6 +24,9 @@ namespace MyWebAPI.Migrations
                     b.Property<byte[]>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("varbinary(16)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Email")
                         .IsRequired()
