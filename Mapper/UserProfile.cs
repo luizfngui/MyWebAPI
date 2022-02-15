@@ -12,7 +12,10 @@ namespace MyWebAPI.Mapper
     {
         public UserProfile()
         {
-            CreateMap<UserDto, User>();
+            CreateMap<UserDto, User>()
+                .ForMember(des => des.CreatedAt, map => map.MapFrom(_ => DateTime.Now));
+
+            CreateMap<User, UserView>();
         }
     }
 }
