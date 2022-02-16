@@ -13,7 +13,9 @@ namespace MyWebAPI.Mapper
         public UserProfile()
         {
             CreateMap<UserDto, User>()
-                .ForMember(des => des.CreatedAt, map => map.MapFrom(_ => DateTime.Now));
+                .ForMember(des => des.CreatedAt, map => map.MapFrom(_ => DateTime.Now))
+                .ForMember(user => user.Password, map => map.MapFrom(_ => BCrypt.Net.BCrypt.HashPassword(_.Password)));
+              
 
             CreateMap<User, UserView>();
         }
