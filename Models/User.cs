@@ -9,10 +9,6 @@ namespace MyWebAPI.Models
 {
     public class User
     {
-        public User()
-        {
-            CreatedAt = DateTime.UtcNow;
-        }
         
         [Key]
         public Guid Id { get; set; }
