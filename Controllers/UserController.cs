@@ -29,7 +29,7 @@ namespace MyWebAPI.Controllers
         [HttpPost]
         public ActionResult AddUser([FromBody] UserDto userDto)
         {
-            User user = _mapper.Map<User>(userDto); 
+            User user = _mapper.Map<User>(userDto);
             _userRepository.addNewUser(user);
             _userRepository.SaveChanges();
             UserView userView = _mapper.Map<UserView>(user);
@@ -41,8 +41,9 @@ namespace MyWebAPI.Controllers
         /// Get the list of users on the DataBase
         ///</summary>
         [HttpGet]
-        public ActionResult<IEnumerable<User>> getUsers()
+        public ActionResult<IEnumerable<UserView>> getUsers()
         {
+            
             return Ok(_userRepository.Users);
         }
 
@@ -50,9 +51,14 @@ namespace MyWebAPI.Controllers
         /// Get a user by its ID
         ///</summary>
         [HttpGet("{id}")]
-        public ActionResult<User> getUserById(Guid id) 
+        public ActionResult<UserView> getUserById(Guid id) 
         {
-            return _userRepository.getUser(id);
+            if (_mapper.Map<UserView>(_userRepository.getUser(id)) is not null)
+                return _mapper.Map<UserView>(_userRepository.getUser(id));
+
+            else
+                return BadRequest("User not found");
+
         }
 
 
