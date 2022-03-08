@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyWebAPI.Data;
 using MyWebAPI.Models;
@@ -12,6 +13,7 @@ namespace MyWebAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly UserRepository _userRepository;
@@ -41,6 +43,7 @@ namespace MyWebAPI.Controllers
         /// Get the list of users on the DataBase
         ///</summary>
         [HttpGet]
+        
         public ActionResult<IEnumerable<UserView>> getUsers()
         {
             

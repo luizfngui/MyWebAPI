@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyWebAPI.Data;
 using MyWebAPI.Models.DTOs;
+using MyWebAPI.Settings.JWT;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,8 +37,10 @@ namespace MyWebAPI.Controllers
             
             if (!BCrypt.Net.BCrypt.Verify(userLogin.Password, userDb.Password))
                 return BadRequest("Invalid password");
+
+            var token = TokenService.GenerateToken(userDb);
             
-            return Ok(userDb);
+            return Ok(token);
         }
 
         
