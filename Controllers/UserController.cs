@@ -32,6 +32,11 @@ namespace MyWebAPI.Controllers
         public ActionResult AddUser([FromBody] UserDto userDto)
         {
             User user = _mapper.Map<User>(userDto);
+
+            if (_userRepository.alreadyExists(userDto))
+                return BadRequest("Login já cadastrado");
+
+            user.Admin = "user";
             _userRepository.addNewUser(user);
             _userRepository.SaveChanges();
             UserView userView = _mapper.Map<UserView>(user);
@@ -62,6 +67,18 @@ namespace MyWebAPI.Controllers
             else
                 return BadRequest("User not found");
 
+        }
+        
+        [HttpGet]
+        [Route("vulnerabilidade")]
+        //[Authorize("admin")]
+        ///<summary>
+        /// Apenas admin pode fazer esse get
+        ///</summary>
+        public ActionResult getSoParaAdmin()
+        {
+            var claim = User.Claims.ToList();
+            return Ok("Flag: [cachorrinho fiadaputa]");
         }
 
 

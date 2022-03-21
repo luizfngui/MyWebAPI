@@ -1,4 +1,5 @@
 ﻿using MyWebAPI.Models;
+using MyWebAPI.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,9 @@ namespace MyWebAPI.Data
         public void addNewUser(User usuario);
 
         public IEnumerable<User> getUsers();
+
+        public User getUserByLogin(string login);
+
+        public bool alreadyExists(UserDto userDto);
     }
 }

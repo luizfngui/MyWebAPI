@@ -38,16 +38,44 @@ namespace MyWebAPI
             
             services.AddDbContext<UserRepository>(x => x.UseMySQL(Configuration.GetConnectionString("UserConnection")));
             services.AddControllers();
+            // services.AddSwaggerGen(c =>
+            // {
+            //     c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyWebAPI", Version = "v1" });
+            //
+            //     string xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            //     var xmlPath = Path.Combine(System.AppContext.BaseDirectory, xmlFile);
+            //     c.IncludeXmlComments(xmlPath);
+            //    
+            // });
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyWebAPI", Version = "v1" });
-
-                string xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(System.AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
-
-                
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MercadoLivre.Api", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT"
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
             });
+
+
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -68,11 +96,15 @@ namespace MyWebAPI
                     ValidateAudience = false
 
                 };
-            })
-            
-            ;
+            });
 
-            
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("user", policy => policy.RequireClaim("Store", "user"));
+                options.AddPolicy("admin", policy => policy.RequireClaim("Store", "admin"));
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

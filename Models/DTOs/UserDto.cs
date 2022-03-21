@@ -15,6 +15,12 @@ namespace MyWebAPI.Models.DTOs
         public string Name { get; set; }
 
         /// <example>
+        /// ryan_reynolds98
+        /// </example>
+        [Required(ErrorMessage = "The field 'Login' is required")]
+        public string Login { get; set; }
+
+        /// <example>
         /// ryan@reynolds.com
         /// </example>
         [Required(ErrorMessage = "The field 'Email' is required")]

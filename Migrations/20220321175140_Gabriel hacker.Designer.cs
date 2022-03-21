@@ -9,8 +9,8 @@ using MyWebAPI.Data;
 namespace MyWebAPI.Migrations
 {
     [DbContext(typeof(UserRepository))]
-    [Migration("20220215171654_Adicionando Usuarios")]
-    partial class AdicionandoUsuarios
+    [Migration("20220321175140_Gabriel hacker")]
+    partial class Gabrielhacker
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,10 +25,17 @@ namespace MyWebAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("varbinary(16)");
 
+                    b.Property<string>("Admin")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
 
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Login")
                         .IsRequired()
                         .HasColumnType("text");
 

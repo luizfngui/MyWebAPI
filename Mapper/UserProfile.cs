@@ -16,7 +16,6 @@ namespace MyWebAPI.Mapper
                 .ForMember(des => des.CreatedAt, map => map.MapFrom(_ => DateTime.Now))
                 .ForMember(user => user.Password, map => map.MapFrom(_ => BCrypt.Net.BCrypt.HashPassword(_.Password)));
               
-
             CreateMap<User, UserView>();
         }
     }

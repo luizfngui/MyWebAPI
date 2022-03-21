@@ -11,9 +11,8 @@ namespace MyWebAPI.Models.DTOs
         /// <example>
         /// ryan@reynolds.com
         /// </example>
-        [Required(ErrorMessage ="The field 'Email' is required")]
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
+        [Required(ErrorMessage ="The field 'Login' is required")]
+        public string Login { get; set; }
         [Required(ErrorMessage = "The field 'Password' is required")]
         [DataType(DataType.Password)]
         public string Password { get; set; }

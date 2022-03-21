@@ -30,17 +30,17 @@ namespace MyWebAPI.Controllers
         public ActionResult AuthUser([FromBody] UserLogin userLogin)
         {
 
-            if (!_userRepository.getUsers().Any(userDb => userDb.Email == userLogin.Email))
-                return BadRequest("This email doesn't existis in our database");
+            if (!_userRepository.getUsers().Any(userDb => userDb.Login == userLogin.Login))
+                return BadRequest("This login doesn't exist in our database");
             
-            var userDb = _userRepository.getUsers().FirstOrDefault(userDb => userDb.Email == userLogin.Email);
+            var userDb = _userRepository.getUsers().FirstOrDefault(userDb => userDb.Login == userLogin.Login.Trim());
             
             if (!BCrypt.Net.BCrypt.Verify(userLogin.Password, userDb.Password))
                 return BadRequest("Invalid password");
 
             var token = TokenService.GenerateToken(userDb);
-            
-            return Ok(token);
+            string resposta = userDb.Name;
+            return Ok(resposta);
         }
 
         
